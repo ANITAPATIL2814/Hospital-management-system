@@ -1,0 +1,26 @@
+package com.demo.serviceimpl;
+
+import java.util.List;
+
+import com.demo.entity.Patient;
+import com.demo.service.PatientService;
+
+//logic of PatientService
+public class PatientServiceImpl implements PatientService {
+
+	@Override
+	public Patient registerPatient(Patient patient) {
+		return null;
+	}
+
+	@Override
+	public List<Patient> getAllPatients() {
+		return null;
+	}
+
+	@Override
+	public Patient getPatientById(int patientId) {
+		return null;
+	}
+
+}

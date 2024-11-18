@@ -1,0 +1,34 @@
+package com.demo.serviceimpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.entity.Appointment;
+import com.demo.repository.AppointmentRepository;
+import com.demo.service.AppointmentService;
+
+//logic of AppointmentServiceImpl CRUD()
+@Service  //to mark class as service class
+public class AppointmentServiceImpl implements AppointmentService {
+
+	@Autowired //to get all method like getter, setter ....
+	AppointmentRepository arepo;//get all methods of repository  
+	
+	@Override
+	public Appointment saveTest(Appointment labTest) {
+		return arepo.save(labTest);
+	}
+
+	@Override
+	public List<Appointment> getAllTest() {
+		return arepo.findAll();
+	}
+
+	@Override
+	public Appointment getTestById(Long aid) {
+		return arepo.findById(aid).orElse(null);
+	}
+
+}

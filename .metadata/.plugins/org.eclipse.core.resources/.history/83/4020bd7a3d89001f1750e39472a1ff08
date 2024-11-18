@@ -1,0 +1,34 @@
+package com.demo.serviceimpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.entity.LabTest;
+import com.demo.repository.PatientRepository;
+import com.demo.service.LabTestService;
+
+//logic of LabTestService CRUD()
+@Service  //to mark class as service class
+public class LabTestServiceImpl implements  LabTestService{
+
+	@Autowired //to get all method like getter, setter ....
+	PatientRepository prepo;//get all methods of repository  
+	
+	@Override
+	public LabTest saveTest(LabTest labTest) {
+		return prepo.save(labTest);;
+	}
+
+	@Override
+	public List<LabTest> getAllTest() {
+		return null;
+	}
+
+	@Override
+	public LabTest getTestById(Long lid) {
+		return null;
+	}
+
+}

@@ -1,0 +1,7 @@
+package com.demo.serviceimpl;
+
+import com.demo.service.LabTestService;
+
+public class LabTestServiceImpl implements  LabTestServiceT{
+
+}

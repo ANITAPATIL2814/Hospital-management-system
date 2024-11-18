@@ -1,0 +1,10 @@
+package com.demo.service;
+
+import com.demo.entity.Patient;
+
+//CRUD declaration for patient entity
+public interface PatientService {
+	
+	//save patient details
+	Patient registerPatient(Patient patient );
+}

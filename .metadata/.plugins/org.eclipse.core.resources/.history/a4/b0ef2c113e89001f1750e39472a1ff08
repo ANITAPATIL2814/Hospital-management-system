@@ -1,0 +1,32 @@
+package com.demo.serviceimpl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.demo.entity.Appointment;
+import com.demo.service.AppointmentService;
+
+//logic of AppointmentServiceImpl CRUD()
+@Service  //to mark class as service class
+public class AppointmentServiceImpl implements AppointmentService {
+
+	@Override
+	public Appointment saveTest(Appointment labTest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Appointment> getAllTest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Appointment getTestById(Long aid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

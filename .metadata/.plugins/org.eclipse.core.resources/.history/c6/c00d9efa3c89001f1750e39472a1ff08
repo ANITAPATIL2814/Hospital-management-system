@@ -1,0 +1,20 @@
+package com.demo.service;
+
+import java.util.List;
+
+import com.demo.entity.LabTest;
+
+//CRUD declaration for LabTest entity
+public interface LabTestService {
+	
+	//save LabTest details
+	LabTest saveTest(LabTest labTest);
+	
+	//fetch all LabTest details from table
+	List<LabTest>getAllTest();
+	
+	//fetch lab test details based on id from table
+	LabTest getTestById(Long lid);
+	
+	
+}

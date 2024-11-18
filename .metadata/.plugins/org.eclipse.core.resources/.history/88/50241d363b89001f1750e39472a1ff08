@@ -1,0 +1,34 @@
+package com.demo.serviceimpl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.demo.entity.Patient;
+import com.demo.repository.PatientRepository;
+import com.demo.service.PatientService;
+
+//logic of PatientService CRUD()
+@Service 
+public class PatientServiceImpl implements PatientService {
+
+	PatientRepository prepo;//get all methods of repository  
+	
+	@Override
+	public Patient registerPatient(Patient patient) {
+		//save() used for inserting new record in table
+		return prepo.save(patient); //instead of writing multiple number of lines of code we only write method
+	}
+
+	@Override
+	public List<Patient> getAllPatients() {
+		return prepo.findAll();
+	}
+
+	@Override
+	public Patient getPatientById(int patientId) {
+		
+		return prepo.findById(patientId).orElse(null);
+	}
+
+}

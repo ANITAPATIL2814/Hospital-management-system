@@ -1,0 +1,5 @@
+package com.demo.serviceimpl;
+//logic of PatientService
+public class PatientServiceImpl {
+
+}

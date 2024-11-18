@@ -1,0 +1,29 @@
+package com.demo.serviceimpl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.demo.entity.LabTest;
+import com.demo.service.LabTestService;
+
+//logic of LabTestService CRUD()
+@Service  //to mark class as service class
+public class LabTestServiceImpl implements  LabTestService{
+
+	@Override
+	public LabTest saveTest(LabTest labTest) {
+		return null;
+	}
+
+	@Override
+	public List<LabTest> getAllTest() {
+		return null;
+	}
+
+	@Override
+	public LabTest getTestById(Long lid) {
+		return null;
+	}
+
+}

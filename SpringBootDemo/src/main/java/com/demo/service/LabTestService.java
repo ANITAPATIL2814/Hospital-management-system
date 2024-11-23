@@ -16,7 +16,5 @@ public interface LabTestService {
 	
 	//fetch lab test details based on testName from table
 	List<LabTest>getByTest(String testName);
-
-	
 	
 }

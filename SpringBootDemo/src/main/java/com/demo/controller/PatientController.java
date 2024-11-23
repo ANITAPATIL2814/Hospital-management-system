@@ -2,51 +2,60 @@ package com.demo.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.demo.entity.Patient;
 import com.demo.exception.PatientNotFoundException;
 import com.demo.service.PatientService;
 import jakarta.validation.Valid;
 
-
-@RestController // convenience annotation that is itself annotated with @Controller and @ResponseBody. 
+@RestController
 public class PatientController {
-	
-	@Autowired //Marks a constructor, field, setter method
-	PatientService ps;
-	
-	//@valid - to check validation while data insertion
-	//@RequestBody : body to http request 
-	//post mapping : insert patient details with httpstatus created and httpstatuscode 201
-	@PostMapping("/registerPatient")
-	public ResponseEntity<Patient> registerPatient(@Valid @RequestBody Patient patient){
-		return new ResponseEntity<>(ps.registerPatient(patient),HttpStatusCode.valueOf(201)); //201 is post status code
-		
-	}
-	@GetMapping("/allPatients")
-	public List<Patient> fetchPatient(){
-		return ps.getAllPatients();
-	}
-	
-	
-	@GetMapping("/Patientsbyid/{patientId}")
-	public ResponseEntity<Patient> fetchPatientById(@PathVariable int patientId) throws PatientNotFoundException
-	{
-		return new ResponseEntity<Patient>(ps.getPatientById(patientId),HttpStatusCode.valueOf(200));
-	}
-	
-	
-	@GetMapping("/Patientsbyphone/{contactNumber}") // Ensure case matches
-	public ResponseEntity<Patient> fetchPatientbycontactnumber(@PathVariable("contactNumber") String contactNumber) {
-	    return new ResponseEntity<Patient>(ps.getByPhone(contactNumber), HttpStatusCode.valueOf(200));
-	}
 
-	
-	
+    @Autowired
+    private PatientService ps;
+
+    @PostMapping("/registerPatient")
+    public ResponseEntity<Patient> registerPatient(@Valid @RequestBody Patient patient) {
+        return new ResponseEntity<>(ps.registerPatient(patient), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/allPatients")
+    public List<Patient> fetchAllPatients() {
+        return ps.getAllPatients();
+    }
+
+    @GetMapping("/{patientId}")
+    public ResponseEntity<Patient> fetchPatientById(@PathVariable int patientId) throws PatientNotFoundException {
+        return new ResponseEntity<>(ps.getPatientById(patientId), HttpStatus.OK);
+    }
+
+    @GetMapping("/byPhone/{contactNumber}")
+    public ResponseEntity<Patient> fetchPatientByContactNumber(@PathVariable String contactNumber) {
+        return new ResponseEntity<>(ps.getByPhone(contactNumber), HttpStatus.OK);
+    }
+
+    // Endpoint to get paginated and sorted patients
+    @GetMapping("/paged")
+    public Page<Patient> getPagedPatients(
+            @RequestParam(defaultValue = "0") int page,  // Page number (default 0)
+            @RequestParam(defaultValue = "10") int size, // Number of records per page (default 10)
+            @RequestParam(defaultValue = "firstName") String sortBy, // Sorting field (default 'firstName')
+            @RequestParam(defaultValue = "asc") String sortDirection) { // Sorting direction (default 'asc')
+
+        // Creating Pageable object from query parameters
+        Sort sort = Sort.by(sortBy);
+        if (sortDirection.equalsIgnoreCase("desc")) {
+            sort = sort.descending();
+        } else {
+            sort = sort.ascending();
+        }
+
+        PageRequest pageable = PageRequest.of(page, size, sort);
+        return ps.getPatients(pageable);
+    }
 }

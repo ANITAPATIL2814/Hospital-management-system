@@ -30,6 +30,4 @@ public class LabTest {
 	@Column(length = 8, nullable = false)
 	@NotNull(message="test price is missing ")
 	private double price;
-	
-	
 }

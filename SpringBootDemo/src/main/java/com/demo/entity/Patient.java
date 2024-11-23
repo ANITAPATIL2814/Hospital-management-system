@@ -1,4 +1,6 @@
 package com.demo.entity;
+import com.demo.Validation.ValidPhoneNumber;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,6 +40,7 @@ public class Patient {
 	
 	@NotBlank(message="patient contact Number is mandatory")//to ensure char given in contactNumber
 	@Column(length = 11, nullable = false, unique=true) 
+	@ValidPhoneNumber(message="Phone number should be exactly 10 digits & Start with 6/7/8/9")
 	private String contactNumber;
 	
 	@NotBlank(message="patient email is mandatory")//to ensure char given in emailID

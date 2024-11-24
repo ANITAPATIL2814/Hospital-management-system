@@ -43,19 +43,16 @@ public class PatientController {
     @GetMapping("/paged")
     public Page<Patient> getPagedPatients(
             @RequestParam(defaultValue = "0") int page,  // Page number (default 0)
-            @RequestParam(defaultValue = "10") int size, // Number of records per page (default 10)
-            @RequestParam(defaultValue = "firstName") String sortBy, // Sorting field (default 'firstName')
-            @RequestParam(defaultValue = "asc") String sortDirection) { // Sorting direction (default 'asc')
+            @RequestParam(defaultValue = "10") int size) { // Number of records per page (default 10)
 
-        // Creating Pageable object from query parameters
-        Sort sort = Sort.by(sortBy);
-        if (sortDirection.equalsIgnoreCase("desc")) {
-            sort = sort.descending();
-        } else {
-            sort = sort.ascending();
-        }
+        // Create the Sort object to sort by 'firstName' in ascending order
+        Sort sort = Sort.by(Sort.Order.asc("firstName"));
 
+        // Create Pageable object with sorting by 'firstName'
         PageRequest pageable = PageRequest.of(page, size, sort);
+
+        // Fetch the patients with pagination and sorting
         return ps.getPatients(pageable);
     }
+
 }

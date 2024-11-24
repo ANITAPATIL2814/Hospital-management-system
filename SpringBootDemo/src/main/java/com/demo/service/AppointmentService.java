@@ -2,7 +2,8 @@ package com.demo.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.demo.entity.Appointment;
 import com.demo.exception.AppointmentNotFoundException;
 
@@ -20,6 +21,7 @@ public interface AppointmentService {
     
     public List<Appointment> getAppointmentsByPatientId(int patientId);
     
-
+    // Fetch Appointment with pagination and sorting
+    Page<Appointment> getAppointment(Pageable pageable);
 }
 

@@ -28,8 +28,6 @@ public class Patient {
 	@Size(min=3,message="patient name must be 3 or more character ") //minimum 2 char given in firstname
 	private String firstName;
 	
-	
-	
 	@Column(length = 35) 
 	@Size(min=3,message="patient surname must be 3 or more character ") //minimum 2 char given in firstname
 	private String lastName;

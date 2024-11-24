@@ -30,6 +30,10 @@ public class Appointment {
     @JoinColumn(name = "lab_test_id", referencedColumnName = "LabId")
     private LabTest labTest;
     
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", referencedColumnName = "doctorId")
+    private Doctor doctor; // Many-to-one relationship with Doctor
+    
     @Override
     public String toString() {
         return "Appointment{" +

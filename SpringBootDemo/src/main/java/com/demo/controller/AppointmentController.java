@@ -5,8 +5,10 @@ import com.demo.exception.AppointmentNotFoundException;
 import com.demo.service.AppointmentService;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -74,5 +76,21 @@ public class AppointmentController {
         return ResponseEntity.ok(appointment);
     }
      
+    
+ // Endpoint to get paginated and sorted Appointment
+    @GetMapping("/pagedApp")
+    public Page<Appointment> getPagedAppointment(
+            @RequestParam(defaultValue = "0") int page,  // Page number (default 0)
+            @RequestParam(defaultValue = "10") int size) { // Number of records per page (default 10)
+
+        // Create the Sort object to sort by 'appointmentId' in ascending order
+        Sort sort = Sort.by(Sort.Order.asc("appointmentId"));
+
+        // Create Pageable object with sorting by 'appointmentId'
+        PageRequest pageable = PageRequest.of(page, size, sort);
+
+        // Fetch the Appointment with pagination and sorting
+        return appointmentService.getAppointment(pageable);
+    }
 
 }

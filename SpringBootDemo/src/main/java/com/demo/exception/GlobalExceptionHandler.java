@@ -36,4 +36,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	        ErrorMessage em = new ErrorMessage(HttpStatus.NOT_FOUND.value(), pe.getMessage());
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(em);
 	    }
+		 
+		 // Handles DoctorNotFoundException and returns a 404 status with an error message.
+		 @ExceptionHandler(DoctorNotFoundException.class)
+	    public ResponseEntity<ErrorMessage> handleDoctorNotFoundException(DoctorNotFoundException pe,
+	            WebRequest request) {
+	        // Create error message with 404 status code and exception message
+	        ErrorMessage em = new ErrorMessage(HttpStatus.NOT_FOUND.value(), pe.getMessage());
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(em);
+	    }
+		
 }

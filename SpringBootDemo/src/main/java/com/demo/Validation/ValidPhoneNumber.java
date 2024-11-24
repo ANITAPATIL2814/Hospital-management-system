@@ -18,5 +18,6 @@ public @interface ValidPhoneNumber {
     Class<?>[] groups() default {}; // Groups for validation
     
     Class<? extends Payload>[] payload() default {}; // Additional data for validation
+
 }
 

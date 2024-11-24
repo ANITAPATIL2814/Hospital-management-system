@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -57,6 +59,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public List<Appointment> getAppointmentsByPatientId(int patientId) {
 		 return appointmentRepository.findAppointmentsByPatientId(patientId);
+	}
+
+	@Override
+	public Page<Appointment> getAppointment(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return appointmentRepository.findAll(pageable);
 	}
 
 

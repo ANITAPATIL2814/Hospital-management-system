@@ -3,7 +3,6 @@ package com.demo.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
-
 import com.demo.entity.Patient;
 import com.demo.exception.PatientNotFoundException;
 
